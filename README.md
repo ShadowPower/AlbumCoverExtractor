@@ -18,7 +18,7 @@ __This library will define unsigned char type as byte.__
 /*
 Read the album cover picture data from the media file
 Parameter 1: File path
-Return: true if successful
+Return: true if successful, false if no picture data or format is incorrect.
 */
 bool loadPictureData(const char *inFilePath);
 

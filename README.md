@@ -8,7 +8,7 @@ Use the __spID3__ namespace to extract the album cover in MPEG, and use the __sp
 
 Because the code is written like C, it can be easily changed to C language.
 
-__This library will define an unsigned char type as a byte.__
+__This library will define the unsigned char type as the byte.__
 
 ```cpp
 // First you need to include these files

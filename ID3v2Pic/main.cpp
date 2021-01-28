@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 		if (!spID3::extractPicture(argv[1], argv[2]))
 			spFLAC::extractPicture(argv[1], argv[2]);
 	}
-	else if (argc = 2)
+	else if (argc == 2)
 	{
 		if (argv[1] != NULL)
 		{

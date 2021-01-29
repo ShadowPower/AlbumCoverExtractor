@@ -50,6 +50,17 @@ namespace spID3 {
 	int picLength = 0;		//存放图片数据长度
 	char picFormat[4] = {};	//存放图片数据的格式（扩展名）
 
+	// ID3V2.3 & ID3V2.4 帧长度获取
+	inline int _frameLength34(ID3V2FrameHeader* fh, byte majorVersion) {
+		if (!fh || majorVersion < 3) {
+			return 0;
+		}
+		if (majorVersion == 3) {
+			return fh->size[0] * 0x1000000 + fh->size[1] * 0x10000 + fh->size[2] * 0x100 + fh->size[3];
+		}
+		return (fh->size[0] & 0x7f) * 0x200000 + (fh->size[1] & 0x7f) * 0x4000 + (fh->size[2] & 0x7f) * 0x80 + (fh->size[3] & 0x7f);
+	}
+
 	//检测图片格式，参数1：数据，返回值：是否成功（不是图片则失败）
 	bool verificationPictureFormat(char *data)
 	{
@@ -158,7 +169,7 @@ namespace spID3 {
 				}
 				//计算帧数据长度
 				//使用int，不溢出的上限约2GB（标签帧没有这么大吧……）
-				int frameLength = id3v2fh.size[0] * 0x1000000 + id3v2fh.size[1] * 0x10000 + id3v2fh.size[2] * 0x100 + id3v2fh.size[3];
+				int frameLength = _frameLength34(&id3v2fh, id3v2h.major);
 				fseek(fp, frameLength, SEEK_CUR);	//向前跳跃到下一个帧头
 				memset(&id3v2fh, 0, 10);			//清除帧头结构体数据
 				fread(&id3v2fh, 10, 1, fp);			//重新读取数据
@@ -166,7 +177,7 @@ namespace spID3 {
 			}
 
 			//计算一下当前图片帧的数据长度
-			int frameLength = id3v2fh.size[0] * 0x1000000 + id3v2fh.size[1] * 0x10000 + id3v2fh.size[2] * 0x100 + id3v2fh.size[3];
+			int frameLength = _frameLength34(&id3v2fh, id3v2h.major);
 
 			/*
 			这是ID3v2.3图片帧的结构：

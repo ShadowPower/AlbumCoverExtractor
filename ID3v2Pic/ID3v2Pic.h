@@ -1,10 +1,10 @@
 /*
-ID3v2±êÇ©Í¼Æ¬ÌáÈ¡¿â Ver 1.0
-Ö§³ÖID3v2ËùÓĞ°æ±¾
-´ÓID3v2±êÇ©ÖĞÎÈ¶¨¡¢¿ì½İ¡¢¸ßĞ§¡¢±ã½İµØÌáÈ¡³öÍ¼Æ¬Êı¾İ
-Ö§³ÖBMP¡¢JPEG¡¢PNG¡¢GIFÍ¼Æ¬¸ñÊ½
-¿É½«Í¼Æ¬Êı¾İÌáÈ¡µ½ÎÄ¼ş»òÄÚ´æÖĞ£¬²¢ÄÜ°²È«µØÊÍ·ÅÄÚ´æ
-ShadowPower ÓÚ2014/8/1 ÉÏÎç
+ID3v2æ ‡ç­¾å›¾ç‰‡æå–åº“ Ver 1.0
+æ”¯æŒID3v2æ‰€æœ‰ç‰ˆæœ¬
+ä»ID3v2æ ‡ç­¾ä¸­ç¨³å®šã€å¿«æ·ã€é«˜æ•ˆã€ä¾¿æ·åœ°æå–å‡ºå›¾ç‰‡æ•°æ®
+æ”¯æŒBMPã€JPEGã€PNGã€GIFå›¾ç‰‡æ ¼å¼
+å¯å°†å›¾ç‰‡æ•°æ®æå–åˆ°æ–‡ä»¶æˆ–å†…å­˜ä¸­ï¼Œå¹¶èƒ½å®‰å…¨åœ°é‡Šæ”¾å†…å­˜
+ShadowPower äº2014/8/1 ä¸Šåˆ
 */
 
 #ifndef _ShadowPower_ID3V2PIC___
@@ -19,38 +19,37 @@ ShadowPower ÓÚ2014/8/1 ÉÏÎç
 #include <cstring>
 
 typedef unsigned char byte;
-using namespace std;
 
 namespace spID3 {
-	//ID3v2±êÇ©Í·²¿½á¹¹Ìå¶¨Òå
+	//ID3v2æ ‡ç­¾å¤´éƒ¨ç»“æ„ä½“å®šä¹‰
 	struct ID3V2Header
 	{
-		char  identi[3];//ID3Í·²¿Ğ£Ñé£¬±ØĞëÎª¡°ID3¡±·ñÔòÈÏÎª²»´æÔÚID3±êÇ©
-		byte  major;	//ID3°æ±¾ºÅ£¬3ÊÇID3v2.3£¬4ÊÇID3v2.4£¬ÒÔ´ËÀàÍÆ
-		byte  revsion;	//ID3¸±°æ±¾ºÅ£¬´Ë°æ±¾Îª00
-		byte  flags;    //±êÖ¾Î»
-		byte  size[4];	//±êÇ©´óĞ¡£¬²»º¬±êÇ©Í·µÄ10¸ö×Ö½Ú
+		char  identi[3];//ID3å¤´éƒ¨æ ¡éªŒï¼Œå¿…é¡»ä¸ºâ€œID3â€å¦åˆ™è®¤ä¸ºä¸å­˜åœ¨ID3æ ‡ç­¾
+		byte  major;	//ID3ç‰ˆæœ¬å·ï¼Œ3æ˜¯ID3v2.3ï¼Œ4æ˜¯ID3v2.4ï¼Œä»¥æ­¤ç±»æ¨
+		byte  revsion;	//ID3å‰¯ç‰ˆæœ¬å·ï¼Œæ­¤ç‰ˆæœ¬ä¸º00
+		byte  flags;    //æ ‡å¿—ä½
+		byte  size[4];	//æ ‡ç­¾å¤§å°ï¼Œä¸å«æ ‡ç­¾å¤´çš„10ä¸ªå­—èŠ‚
 	};
 
-	//ID3v2±êÇ©Ö¡Í·²¿½á¹¹Ìå¶¨Òå
+	//ID3v2æ ‡ç­¾å¸§å¤´éƒ¨ç»“æ„ä½“å®šä¹‰
 	struct ID3V2FrameHeader
 	{
-		char FrameId[4];//±êÊ¶·û£¬ÓÃÓÚÃèÊö´Ë±êÇ©Ö¡µÄÄÚÈİÀàĞÍ
-		byte size[4];	//±êÇ©Ö¡µÄ´óĞ¡£¬²»º¬±êÇ©Í·µÄ10¸ö×Ö½Ú  
-		byte flags[2];	//±êÖ¾Î»  
+		char FrameId[4];//æ ‡è¯†ç¬¦ï¼Œç”¨äºæè¿°æ­¤æ ‡ç­¾å¸§çš„å†…å®¹ç±»å‹
+		byte size[4];	//æ ‡ç­¾å¸§çš„å¤§å°ï¼Œä¸å«æ ‡ç­¾å¤´çš„10ä¸ªå­—èŠ‚  
+		byte flags[2];	//æ ‡å¿—ä½  
 	};
 
 	struct ID3V22FrameHeader
 	{
-		char FrameId[3];//±êÊ¶·û£¬ÓÃÓÚÃèÊö´Ë±êÇ©Ö¡µÄÄÚÈİÀàĞÍ
-		byte size[3];	//±êÇ©Ö¡µÄ´óĞ¡£¬²»º¬±êÇ©Í·µÄ6¸ö×Ö½Ú  
+		char FrameId[3];//æ ‡è¯†ç¬¦ï¼Œç”¨äºæè¿°æ­¤æ ‡ç­¾å¸§çš„å†…å®¹ç±»å‹
+		byte size[3];	//æ ‡ç­¾å¸§çš„å¤§å°ï¼Œä¸å«æ ‡ç­¾å¤´çš„6ä¸ªå­—èŠ‚  
 	};
 
-	byte *pPicData = 0;		//Ö¸ÏòÍ¼Æ¬Êı¾İµÄÖ¸Õë
-	int picLength = 0;		//´æ·ÅÍ¼Æ¬Êı¾İ³¤¶È
-	char picFormat[4] = {};	//´æ·ÅÍ¼Æ¬Êı¾İµÄ¸ñÊ½£¨À©Õ¹Ãû£©
+	byte *pPicData = 0;		//æŒ‡å‘å›¾ç‰‡æ•°æ®çš„æŒ‡é’ˆ
+	int picLength = 0;		//å­˜æ”¾å›¾ç‰‡æ•°æ®é•¿åº¦
+	char picFormat[4] = {};	//å­˜æ”¾å›¾ç‰‡æ•°æ®çš„æ ¼å¼ï¼ˆæ‰©å±•åï¼‰
 
-	// ID3V2.3 & ID3V2.4 Ö¡³¤¶È»ñÈ¡
+	// ID3V2.3 & ID3V2.4 å¸§é•¿åº¦è·å–
 	inline int _frameLength34(ID3V2FrameHeader* fh, byte majorVersion) {
 		if (!fh || majorVersion < 3) {
 			return 0;
@@ -61,10 +60,10 @@ namespace spID3 {
 		return (fh->size[0] & 0x7f) * 0x200000 + (fh->size[1] & 0x7f) * 0x4000 + (fh->size[2] & 0x7f) * 0x80 + (fh->size[3] & 0x7f);
 	}
 
-	//¼ì²âÍ¼Æ¬¸ñÊ½£¬²ÎÊı1£ºÊı¾İ£¬·µ»ØÖµ£ºÊÇ·ñ³É¹¦£¨²»ÊÇÍ¼Æ¬ÔòÊ§°Ü£©
+	//æ£€æµ‹å›¾ç‰‡æ ¼å¼ï¼Œå‚æ•°1ï¼šæ•°æ®ï¼Œè¿”å›å€¼ï¼šæ˜¯å¦æˆåŠŸï¼ˆä¸æ˜¯å›¾ç‰‡åˆ™å¤±è´¥ï¼‰
 	bool verificationPictureFormat(char *data)
 	{
-		//Ö§³Ö¸ñÊ½£ºJPEG/PNG/BMP/GIF
+		//æ”¯æŒæ ¼å¼ï¼šJPEG/PNG/BMP/GIF
 		byte jpeg[2] = { 0xff, 0xd8 };
 		byte png[8] = { 0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a };
 		byte gif[6] = { 0x47, 0x49, 0x46, 0x38, 0x39, 0x61 };
@@ -95,7 +94,7 @@ namespace spID3 {
 		return true;
 	}
 
-	//°²È«ÊÍ·ÅÄÚ´æ
+	//å®‰å…¨é‡Šæ”¾å†…å­˜
 	void freePictureData()
 	{
 		if (pPicData)
@@ -107,137 +106,137 @@ namespace spID3 {
 		memset(&picFormat, 0, 4);
 	}
 
-	//½«Í¼Æ¬ÌáÈ¡µ½ÄÚ´æ£¬²ÎÊı1£ºÎÄ¼şÂ·¾¶£¬³É¹¦·µ»Øtrue
+	//å°†å›¾ç‰‡æå–åˆ°å†…å­˜ï¼Œå‚æ•°1ï¼šæ–‡ä»¶è·¯å¾„ï¼ŒæˆåŠŸè¿”å›true
 	bool loadPictureData(const char *inFilePath)
 	{
 		freePictureData();
-		FILE *fp = NULL;				//³õÊ¼»¯ÎÄ¼şÖ¸Õë£¬ÖÃ¿Õ
-		fp = fopen(inFilePath, "rb");	//ÒÔÖ»¶Á&¶ş½øÖÆ·½Ê½´ò¿ªÎÄ¼ş
-		if (!fp)						//Èç¹û´ò¿ªÊ§°Ü
+		FILE *fp = NULL;				//åˆå§‹åŒ–æ–‡ä»¶æŒ‡é’ˆï¼Œç½®ç©º
+		fp = fopen(inFilePath, "rb");	//ä»¥åªè¯»&äºŒè¿›åˆ¶æ–¹å¼æ‰“å¼€æ–‡ä»¶
+		if (!fp)						//å¦‚æœæ‰“å¼€å¤±è´¥
 		{
 			fp = NULL;
 			return false;
 		}
-		fseek(fp, 0, SEEK_SET);			//ÉèÎÄ¼şÁ÷Ö¸Õëµ½ÎÄ¼şÍ·²¿£¨Ó¡ÏóÖĞ´ò¿ªÖ®ºóÄ¬ÈÏÔÚÎ²²¿£©
+		fseek(fp, 0, SEEK_SET);			//è®¾æ–‡ä»¶æµæŒ‡é’ˆåˆ°æ–‡ä»¶å¤´éƒ¨ï¼ˆå°è±¡ä¸­æ‰“å¼€ä¹‹åé»˜è®¤åœ¨å°¾éƒ¨ï¼‰
 
-		//¶ÁÈ¡
-		ID3V2Header id3v2h;				//´´½¨Ò»¸öID3v2±êÇ©Í·½á¹¹Ìå
-		memset(&id3v2h, 0, 10);			//ÄÚ´æÌî0£¬10¸ö×Ö½Ú
-		fread(&id3v2h, 10, 1, fp);		//°ÑÎÄ¼şÍ·²¿10¸ö×Ö½ÚĞ´Èë½á¹¹ÌåÄÚ´æ
+		//è¯»å–
+		ID3V2Header id3v2h;				//åˆ›å»ºä¸€ä¸ªID3v2æ ‡ç­¾å¤´ç»“æ„ä½“
+		memset(&id3v2h, 0, 10);			//å†…å­˜å¡«0ï¼Œ10ä¸ªå­—èŠ‚
+		fread(&id3v2h, 10, 1, fp);		//æŠŠæ–‡ä»¶å¤´éƒ¨10ä¸ªå­—èŠ‚å†™å…¥ç»“æ„ä½“å†…å­˜
 
-		//ÎÄ¼şÍ·Ê¶±ğ
+		//æ–‡ä»¶å¤´è¯†åˆ«
 		if (strncmp(id3v2h.identi, "ID3", 3) != 0)
 		{
 			fclose(fp);
 			fp = NULL;
-			return false;//Ã»ÓĞID3±êÇ©
+			return false;//æ²¡æœ‰ID3æ ‡ç­¾
 		}
 
-		//ÄÜÔËĞĞµ½ÕâÀïÓ¦¸ÃÒÑ¾­³É¹¦´ò¿ªÎÄ¼şÁË
+		//èƒ½è¿è¡Œåˆ°è¿™é‡Œåº”è¯¥å·²ç»æˆåŠŸæ‰“å¼€æ–‡ä»¶äº†
 
-		//¼ÆËãÕû¸ö±êÇ©³¤¶È£¬Ã¿¸ö×Ö½Ú½ö7Î»ÓĞĞ§
+		//è®¡ç®—æ•´ä¸ªæ ‡ç­¾é•¿åº¦ï¼Œæ¯ä¸ªå­—èŠ‚ä»…7ä½æœ‰æ•ˆ
 		int tagTotalLength = (id3v2h.size[0] & 0x7f) * 0x200000 + (id3v2h.size[1] & 0x7f) * 0x4000 + (id3v2h.size[2] & 0x7f) * 0x80 + (id3v2h.size[3] & 0x7f);
 
-		if (id3v2h.major == 3 || id3v2h.major == 4)	//ID3v2.3 »ò ID3v2.4
+		if (id3v2h.major == 3 || id3v2h.major == 4)	//ID3v2.3 æˆ– ID3v2.4
 		{
-			ID3V2FrameHeader id3v2fh;		//´´½¨Ò»¸öID3v2±êÇ©Ö¡Í·½á¹¹Ìå
+			ID3V2FrameHeader id3v2fh;		//åˆ›å»ºä¸€ä¸ªID3v2æ ‡ç­¾å¸§å¤´ç»“æ„ä½“
 			memset(&id3v2fh, 0, 10);
 
-			bool hasExtendedHeader = ((id3v2h.flags >> 6 & 0x1) == 1);//ÊÇ·ñÓĞÀ©Õ¹Í·
+			bool hasExtendedHeader = ((id3v2h.flags >> 6 & 0x1) == 1);//æ˜¯å¦æœ‰æ‰©å±•å¤´
 
 			if (hasExtendedHeader)
 			{
-				//Èç¹ûÓĞÀ©Õ¹Í·
+				//å¦‚æœæœ‰æ‰©å±•å¤´
 				byte extendedHeaderSize[4] = {};
 				memset(&extendedHeaderSize, 0, 4);
 				fread(&extendedHeaderSize, 4, 1, fp);
-				//È¡µÃÀ©Õ¹Í·´óĞ¡£¨²»º¬ÒÔÉÏÊı¾İ£©
+				//å–å¾—æ‰©å±•å¤´å¤§å°ï¼ˆä¸å«ä»¥ä¸Šæ•°æ®ï¼‰
 				int extendedHeaderLength = extendedHeaderSize[0] * 0x1000000 + extendedHeaderSize[1] * 0x10000 + extendedHeaderSize[2] * 0x100 + extendedHeaderSize[3];
-				//Ìø¹ıÀ©Õ¹Í·
+				//è·³è¿‡æ‰©å±•å¤´
 				fseek(fp, extendedHeaderLength, SEEK_CUR);
 			}
 
-			fread(&id3v2fh, 10, 1, fp);				//½«Êı¾İĞ´µ½ID3V2FrameHeader½á¹¹ÌåÖĞ
-			int curDataLength = 10;					//´æ·Åµ±Ç°ÒÑ¾­¶ÁÈ¡µÄÊı¾İ´óĞ¡£¬¸Õ²ÅÒÑ¾­¶ÁÈë10×Ö½Ú
-			while ((strncmp(id3v2fh.FrameId, "APIC", 4) != 0))//Èç¹ûÖ¡Í·Ã»ÓĞAPIC±êÊ¶·ûÔòÑ­»·Ö´ĞĞ
+			fread(&id3v2fh, 10, 1, fp);				//å°†æ•°æ®å†™åˆ°ID3V2FrameHeaderç»“æ„ä½“ä¸­
+			int curDataLength = 10;					//å­˜æ”¾å½“å‰å·²ç»è¯»å–çš„æ•°æ®å¤§å°ï¼Œåˆšæ‰å·²ç»è¯»å…¥10å­—èŠ‚
+			while ((strncmp(id3v2fh.FrameId, "APIC", 4) != 0))//å¦‚æœå¸§å¤´æ²¡æœ‰APICæ ‡è¯†ç¬¦åˆ™å¾ªç¯æ‰§è¡Œ
 			{
 				if (curDataLength > tagTotalLength)
 				{
 					fclose(fp);
 					fp = NULL;
-					return false;					//Î´·¢ÏÖÍ¼Æ¬Êı¾İ
+					return false;					//æœªå‘ç°å›¾ç‰‡æ•°æ®
 				}
-				//¼ÆËãÖ¡Êı¾İ³¤¶È
-				//Ê¹ÓÃint£¬²»Òç³öµÄÉÏÏŞÔ¼2GB£¨±êÇ©Ö¡Ã»ÓĞÕâÃ´´ó°É¡­¡­£©
+				//è®¡ç®—å¸§æ•°æ®é•¿åº¦
+				//ä½¿ç”¨intï¼Œä¸æº¢å‡ºçš„ä¸Šé™çº¦2GBï¼ˆæ ‡ç­¾å¸§æ²¡æœ‰è¿™ä¹ˆå¤§å§â€¦â€¦ï¼‰
 				int frameLength = _frameLength34(&id3v2fh, id3v2h.major);
-				fseek(fp, frameLength, SEEK_CUR);	//ÏòÇ°ÌøÔ¾µ½ÏÂÒ»¸öÖ¡Í·
-				memset(&id3v2fh, 0, 10);			//Çå³ıÖ¡Í·½á¹¹ÌåÊı¾İ
-				fread(&id3v2fh, 10, 1, fp);			//ÖØĞÂ¶ÁÈ¡Êı¾İ
-				curDataLength += frameLength + 10;	//¼ÇÂ¼µ±Ç°ËùÔÚµÄID3±êÇ©Î»ÖÃ£¬ÒÔ±ãÍË³öÑ­»·
+				fseek(fp, frameLength, SEEK_CUR);	//å‘å‰è·³è·ƒåˆ°ä¸‹ä¸€ä¸ªå¸§å¤´
+				memset(&id3v2fh, 0, 10);			//æ¸…é™¤å¸§å¤´ç»“æ„ä½“æ•°æ®
+				fread(&id3v2fh, 10, 1, fp);			//é‡æ–°è¯»å–æ•°æ®
+				curDataLength += frameLength + 10;	//è®°å½•å½“å‰æ‰€åœ¨çš„ID3æ ‡ç­¾ä½ç½®ï¼Œä»¥ä¾¿é€€å‡ºå¾ªç¯
 			}
 
-			//¼ÆËãÒ»ÏÂµ±Ç°Í¼Æ¬Ö¡µÄÊı¾İ³¤¶È
+			//è®¡ç®—ä¸€ä¸‹å½“å‰å›¾ç‰‡å¸§çš„æ•°æ®é•¿åº¦
 			int frameLength = _frameLength34(&id3v2fh, id3v2h.major);
 
 			/*
-			ÕâÊÇID3v2.3Í¼Æ¬Ö¡µÄ½á¹¹£º
+			è¿™æ˜¯ID3v2.3å›¾ç‰‡å¸§çš„ç»“æ„ï¼š
 
 			<Header for 'Attached picture', ID: "APIC">
-			Í·²¿10¸ö×Ö½ÚµÄÖ¡Í·
+			å¤´éƒ¨10ä¸ªå­—èŠ‚çš„å¸§å¤´
 
 			Text encoding      $xx
-			ÒªÌø¹ıÒ»¸ö×Ö½Ú£¨ÎÄ×Ö±àÂë£©
+			è¦è·³è¿‡ä¸€ä¸ªå­—èŠ‚ï¼ˆæ–‡å­—ç¼–ç ï¼‰
 
 			MIME type          <text string> $00
-			Ìø¹ı£¨ÎÄ±¾ + /0£©£¬ÕâÀï¿ÉµÃµ½ÎÄ¼ş¸ñÊ½
+			è·³è¿‡ï¼ˆæ–‡æœ¬ + /0ï¼‰ï¼Œè¿™é‡Œå¯å¾—åˆ°æ–‡ä»¶æ ¼å¼
 
 			Picture type       $xx
-			Ìø¹ıÒ»¸ö×Ö½Ú£¨Í¼Æ¬ÀàĞÍ£©
+			è·³è¿‡ä¸€ä¸ªå­—èŠ‚ï¼ˆå›¾ç‰‡ç±»å‹ï¼‰
 
 			Description        <text string according to encoding> $00 (00)
-			Ìø¹ı£¨ÎÄ±¾ + /0£©£¬ÕâÀï¿ÉµÃµ½ÃèÊöĞÅÏ¢
+			è·³è¿‡ï¼ˆæ–‡æœ¬ + /0ï¼‰ï¼Œè¿™é‡Œå¯å¾—åˆ°æè¿°ä¿¡æ¯
 
 			Picture data       <binary data>
-			ÕâÊÇÕæÕıµÄÍ¼Æ¬Êı¾İ
+			è¿™æ˜¯çœŸæ­£çš„å›¾ç‰‡æ•°æ®
 			*/
-			int nonPicDataLength = 0;	//·ÇÍ¼Æ¬Êı¾İµÄ³¤¶È
-			fseek(fp, 1, SEEK_CUR);		//ĞÅÑöÖ®Ô¾
+			int nonPicDataLength = 0;	//éå›¾ç‰‡æ•°æ®çš„é•¿åº¦
+			fseek(fp, 1, SEEK_CUR);		//ä¿¡ä»°ä¹‹è·ƒ
 			nonPicDataLength++;
 
-			char tempData[20] = {};		//ÁÙÊ±´æ·ÅÊı¾İµÄ¿Õ¼ä
-			char mimeType[20] = {};		//Í¼Æ¬ÀàĞÍ
-			int mimeTypeLength = 0;		//Í¼Æ¬ÀàĞÍÎÄ±¾³¤¶È
+			char tempData[20] = {};		//ä¸´æ—¶å­˜æ”¾æ•°æ®çš„ç©ºé—´
+			char mimeType[20] = {};		//å›¾ç‰‡ç±»å‹
+			int mimeTypeLength = 0;		//å›¾ç‰‡ç±»å‹æ–‡æœ¬é•¿åº¦
 
-			fread(&tempData, 20, 1, fp);//È¡µÃÒ»Ğ¡¶ÎÊı¾İ
-			fseek(fp, -20, SEEK_CUR);	//»Øµ½Ô­Î»
+			fread(&tempData, 20, 1, fp);//å–å¾—ä¸€å°æ®µæ•°æ®
+			fseek(fp, -20, SEEK_CUR);	//å›åˆ°åŸä½
 
-			strcpy(mimeType, tempData);				//¸´ÖÆ³öÒ»¸ö×Ö·û´®
-			mimeTypeLength = strlen(mimeType) + 1;	//²âÊÔ×Ö·û´®³¤¶È£¬²¹ÉÏÄ©Î²00
-			fseek(fp, mimeTypeLength, SEEK_CUR);	//Ìøµ½´ËÊı¾İÖ®ºó
-			nonPicDataLength += mimeTypeLength;		//¼ÇÂ¼³¤¶È
+			strcpy(mimeType, tempData);				//å¤åˆ¶å‡ºä¸€ä¸ªå­—ç¬¦ä¸²
+			mimeTypeLength = strlen(mimeType) + 1;	//æµ‹è¯•å­—ç¬¦ä¸²é•¿åº¦ï¼Œè¡¥ä¸Šæœ«å°¾00
+			fseek(fp, mimeTypeLength, SEEK_CUR);	//è·³åˆ°æ­¤æ•°æ®ä¹‹å
+			nonPicDataLength += mimeTypeLength;		//è®°å½•é•¿åº¦
 
-			fseek(fp, 1, SEEK_CUR);		//ÔÙÒ»´ÎĞÅÑöÖ®Ô¾
+			fseek(fp, 1, SEEK_CUR);		//å†ä¸€æ¬¡ä¿¡ä»°ä¹‹è·ƒ
 			nonPicDataLength++;
 
-			int temp = 0;				//¼ÇÂ¼µ±Ç°×Ö½ÚÊı¾İµÄ±äÁ¿
-			fread(&temp, 1, 1, fp);		//¶ÁÈ¡Ò»¸ö×Ö½Ú
+			int temp = 0;				//è®°å½•å½“å‰å­—èŠ‚æ•°æ®çš„å˜é‡
+			fread(&temp, 1, 1, fp);		//è¯»å–ä¸€ä¸ªå­—èŠ‚
 			nonPicDataLength++;			//+1
-			while (temp)				//Ñ­»·µ½tempÎª0
+			while (temp)				//å¾ªç¯åˆ°tempä¸º0
 			{
-				fread(&temp, 1, 1, fp);	//Èç¹û²»ÊÇ0¼ÌĞø¶ÁÒ»×Ö½ÚµÄÊı¾İ
-				nonPicDataLength++;		//¼ÆÊı
+				fread(&temp, 1, 1, fp);	//å¦‚æœä¸æ˜¯0ç»§ç»­è¯»ä¸€å­—èŠ‚çš„æ•°æ®
+				nonPicDataLength++;		//è®¡æ•°
 			}
-			//Ìø¹ıÁËDescriptionÎÄ±¾£¬ÒÔ¼°Ä©Î²µÄ\0
+			//è·³è¿‡äº†Descriptionæ–‡æœ¬ï¼Œä»¥åŠæœ«å°¾çš„\0
 
-			//·ÇÖ÷Á÷Çé¿ö¼ì²â+»ñµÃÎÄ¼ş¸ñÊ½
+			//éä¸»æµæƒ…å†µæ£€æµ‹+è·å¾—æ–‡ä»¶æ ¼å¼
 			memset(tempData, 0, 20);
 			fread(&tempData, 8, 1, fp);
-			fseek(fp, -8, SEEK_CUR);	//»Øµ½Ô­Î»
-			//ÅĞ¶Ï40´Î£¬Ò»Î»Ò»Î»Ìøµ½ÎÄ¼şÍ·
-			bool ok = false;			//ÊÇ·ñÕıÈ·Ê¶±ğ³öÎÄ¼şÍ·
+			fseek(fp, -8, SEEK_CUR);	//å›åˆ°åŸä½
+			//åˆ¤æ–­40æ¬¡ï¼Œä¸€ä½ä¸€ä½è·³åˆ°æ–‡ä»¶å¤´
+			bool ok = false;			//æ˜¯å¦æ­£ç¡®è¯†åˆ«å‡ºæ–‡ä»¶å¤´
 			for (int i = 0; i < 40; i++)
 			{
-				//Ğ£ÑéÎÄ¼şÍ·
+				//æ ¡éªŒæ–‡ä»¶å¤´
 				if (verificationPictureFormat(tempData))
 				{
 					ok = true;
@@ -245,7 +244,7 @@ namespace spID3 {
 				}
 				else
 				{
-					//Èç¹ûĞ£ÑéÊ§°Ü³¢ÊÔ¼ÌĞøÏòºóĞ£Ñé
+					//å¦‚æœæ ¡éªŒå¤±è´¥å°è¯•ç»§ç»­å‘åæ ¡éªŒ
 					fseek(fp, 1, SEEK_CUR);
 					nonPicDataLength++;
 					fread(&tempData, 8, 1, fp);
@@ -258,43 +257,43 @@ namespace spID3 {
 				fclose(fp);
 				fp = NULL;
 				freePictureData();
-				return false;			//ÎŞ·¨Ê¶±ğµÄÊı¾İ
+				return false;			//æ— æ³•è¯†åˆ«çš„æ•°æ®
 			}
-			//-----ÕæÕıµÄÍ¼Æ¬Êı¾İ-----
-			picLength = frameLength - nonPicDataLength;		//¼ÆËãÍ¼Æ¬Êı¾İ³¤¶È
-			pPicData = new byte[picLength];					//¶¯Ì¬·ÖÅäÍ¼Æ¬Êı¾İÄÚ´æ¿Õ¼ä
-			memset(pPicData, 0, picLength);					//Çå¿ÕÍ¼Æ¬Êı¾İÄÚ´æ
-			fread(pPicData, picLength, 1, fp);				//µÃµ½Í¼Æ¬Êı¾İ
+			//-----çœŸæ­£çš„å›¾ç‰‡æ•°æ®-----
+			picLength = frameLength - nonPicDataLength;		//è®¡ç®—å›¾ç‰‡æ•°æ®é•¿åº¦
+			pPicData = new byte[picLength];					//åŠ¨æ€åˆ†é…å›¾ç‰‡æ•°æ®å†…å­˜ç©ºé—´
+			memset(pPicData, 0, picLength);					//æ¸…ç©ºå›¾ç‰‡æ•°æ®å†…å­˜
+			fread(pPicData, picLength, 1, fp);				//å¾—åˆ°å›¾ç‰‡æ•°æ®
 			//------------------------
-			fclose(fp);										//²Ù×÷ÒÑÍê³É£¬¹Ø±ÕÎÄ¼ş¡£
+			fclose(fp);										//æ“ä½œå·²å®Œæˆï¼Œå…³é—­æ–‡ä»¶ã€‚
 		}
 		else if (id3v2h.major == 2)
 		{
 			//ID3v2.2
-			ID3V22FrameHeader id3v2fh;		//´´½¨Ò»¸öID3v2.2±êÇ©Ö¡Í·½á¹¹Ìå
+			ID3V22FrameHeader id3v2fh;		//åˆ›å»ºä¸€ä¸ªID3v2.2æ ‡ç­¾å¸§å¤´ç»“æ„ä½“
 			memset(&id3v2fh, 0, 6);
-			fread(&id3v2fh, 6, 1, fp);				//½«Êı¾İĞ´µ½ID3V2.2FrameHeader½á¹¹ÌåÖĞ
-			int curDataLength = 6;					//´æ·Åµ±Ç°ÒÑ¾­¶ÁÈ¡µÄÊı¾İ´óĞ¡£¬¸Õ²ÅÒÑ¾­¶ÁÈë6×Ö½Ú
-			while ((strncmp(id3v2fh.FrameId, "PIC", 3) != 0))//Èç¹ûÖ¡Í·Ã»ÓĞPIC±êÊ¶·ûÔòÑ­»·Ö´ĞĞ
+			fread(&id3v2fh, 6, 1, fp);				//å°†æ•°æ®å†™åˆ°ID3V2.2FrameHeaderç»“æ„ä½“ä¸­
+			int curDataLength = 6;					//å­˜æ”¾å½“å‰å·²ç»è¯»å–çš„æ•°æ®å¤§å°ï¼Œåˆšæ‰å·²ç»è¯»å…¥6å­—èŠ‚
+			while ((strncmp(id3v2fh.FrameId, "PIC", 3) != 0))//å¦‚æœå¸§å¤´æ²¡æœ‰PICæ ‡è¯†ç¬¦åˆ™å¾ªç¯æ‰§è¡Œ
 			{
 				if (curDataLength > tagTotalLength)
 				{
 					fclose(fp);
 					fp = NULL;
-					return false;					//Î´·¢ÏÖÍ¼Æ¬Êı¾İ
+					return false;					//æœªå‘ç°å›¾ç‰‡æ•°æ®
 				}
-				//¼ÆËãÖ¡Êı¾İ³¤¶È
+				//è®¡ç®—å¸§æ•°æ®é•¿åº¦
 				int frameLength = id3v2fh.size[0] * 0x10000 + id3v2fh.size[1] * 0x100 + id3v2fh.size[2];
-				fseek(fp, frameLength, SEEK_CUR);	//ÏòÇ°ÌøÔ¾µ½ÏÂÒ»¸öÖ¡Í·
-				memset(&id3v2fh, 0, 6);			//Çå³ıÖ¡Í·½á¹¹ÌåÊı¾İ
-				fread(&id3v2fh, 6, 1, fp);			//ÖØĞÂ¶ÁÈ¡Êı¾İ
-				curDataLength += frameLength + 6;	//¼ÇÂ¼µ±Ç°ËùÔÚµÄID3±êÇ©Î»ÖÃ£¬ÒÔ±ãÍË³öÑ­»·
+				fseek(fp, frameLength, SEEK_CUR);	//å‘å‰è·³è·ƒåˆ°ä¸‹ä¸€ä¸ªå¸§å¤´
+				memset(&id3v2fh, 0, 6);			//æ¸…é™¤å¸§å¤´ç»“æ„ä½“æ•°æ®
+				fread(&id3v2fh, 6, 1, fp);			//é‡æ–°è¯»å–æ•°æ®
+				curDataLength += frameLength + 6;	//è®°å½•å½“å‰æ‰€åœ¨çš„ID3æ ‡ç­¾ä½ç½®ï¼Œä»¥ä¾¿é€€å‡ºå¾ªç¯
 			}
 
-			int frameLength = id3v2fh.size[0] * 0x10000 + id3v2fh.size[1] * 0x100 + id3v2fh.size[2]; //Èç¹û¶Áµ½ÁËÍ¼Æ¬Ö¡£¬¼ÆËãÖ¡³¤
+			int frameLength = id3v2fh.size[0] * 0x10000 + id3v2fh.size[1] * 0x100 + id3v2fh.size[2]; //å¦‚æœè¯»åˆ°äº†å›¾ç‰‡å¸§ï¼Œè®¡ç®—å¸§é•¿
 
 			/*
-			Êı¾İ¸ñÊ½£º
+			æ•°æ®æ ¼å¼ï¼š
 
 			Attached picture   "PIC"
 			Frame size         $xx xx xx
@@ -305,38 +304,38 @@ namespace spID3 {
 			Picture data       <binary data>
 			*/
 
-			int nonPicDataLength = 0;	//·ÇÍ¼Æ¬Êı¾İµÄ³¤¶È
-			fseek(fp, 1, SEEK_CUR);		//ĞÅÑöÖ®Ô¾ Text encoding
+			int nonPicDataLength = 0;	//éå›¾ç‰‡æ•°æ®çš„é•¿åº¦
+			fseek(fp, 1, SEEK_CUR);		//ä¿¡ä»°ä¹‹è·ƒ Text encoding
 			nonPicDataLength++;
 
 			char imageType[4] = {};
 			memset(&imageType, 0, 4);
-			fread(&imageType, 3, 1, fp);//Í¼Ïñ¸ñÊ½
+			fread(&imageType, 3, 1, fp);//å›¾åƒæ ¼å¼
 			nonPicDataLength += 3;
 
-			fseek(fp, 1, SEEK_CUR);		//ĞÅÑöÖ®Ô¾ Picture type
+			fseek(fp, 1, SEEK_CUR);		//ä¿¡ä»°ä¹‹è·ƒ Picture type
 			nonPicDataLength++;
 
-			int temp = 0;				//¼ÇÂ¼µ±Ç°×Ö½ÚÊı¾İµÄ±äÁ¿
-			fread(&temp, 1, 1, fp);		//¶ÁÈ¡Ò»¸ö×Ö½Ú
+			int temp = 0;				//è®°å½•å½“å‰å­—èŠ‚æ•°æ®çš„å˜é‡
+			fread(&temp, 1, 1, fp);		//è¯»å–ä¸€ä¸ªå­—èŠ‚
 			nonPicDataLength++;			//+1
-			while (temp)				//Ñ­»·µ½tempÎª0
+			while (temp)				//å¾ªç¯åˆ°tempä¸º0
 			{
-				fread(&temp, 1, 1, fp);	//Èç¹û²»ÊÇ0¼ÌĞø¶ÁÒ»×Ö½ÚµÄÊı¾İ
-				nonPicDataLength++;		//¼ÆÊı
+				fread(&temp, 1, 1, fp);	//å¦‚æœä¸æ˜¯0ç»§ç»­è¯»ä¸€å­—èŠ‚çš„æ•°æ®
+				nonPicDataLength++;		//è®¡æ•°
 			}
-			//Ìø¹ıÁËDescriptionÎÄ±¾£¬ÒÔ¼°Ä©Î²µÄ\0
+			//è·³è¿‡äº†Descriptionæ–‡æœ¬ï¼Œä»¥åŠæœ«å°¾çš„\0
 
-			//·ÇÖ÷Á÷Çé¿ö¼ì²â
+			//éä¸»æµæƒ…å†µæ£€æµ‹
 			char tempData[20] = {};
 			memset(tempData, 0, 20);
 			fread(&tempData, 8, 1, fp);
-			fseek(fp, -8, SEEK_CUR);	//»Øµ½Ô­Î»
-			//ÅĞ¶Ï40´Î£¬Ò»Î»Ò»Î»Ìøµ½ÎÄ¼şÍ·
-			bool ok = false;			//ÊÇ·ñÕıÈ·Ê¶±ğ³öÎÄ¼şÍ·
+			fseek(fp, -8, SEEK_CUR);	//å›åˆ°åŸä½
+			//åˆ¤æ–­40æ¬¡ï¼Œä¸€ä½ä¸€ä½è·³åˆ°æ–‡ä»¶å¤´
+			bool ok = false;			//æ˜¯å¦æ­£ç¡®è¯†åˆ«å‡ºæ–‡ä»¶å¤´
 			for (int i = 0; i < 40; i++)
 			{
-				//Ğ£ÑéÎÄ¼şÍ·
+				//æ ¡éªŒæ–‡ä»¶å¤´
 				if (verificationPictureFormat(tempData))
 				{
 					ok = true;
@@ -344,7 +343,7 @@ namespace spID3 {
 				}
 				else
 				{
-					//Èç¹ûĞ£ÑéÊ§°Ü³¢ÊÔ¼ÌĞøÏòºóĞ£Ñé
+					//å¦‚æœæ ¡éªŒå¤±è´¥å°è¯•ç»§ç»­å‘åæ ¡éªŒ
 					fseek(fp, 1, SEEK_CUR);
 					nonPicDataLength++;
 					fread(&tempData, 8, 1, fp);
@@ -357,39 +356,39 @@ namespace spID3 {
 				fclose(fp);
 				fp = NULL;
 				freePictureData();
-				return false;			//ÎŞ·¨Ê¶±ğµÄÊı¾İ
+				return false;			//æ— æ³•è¯†åˆ«çš„æ•°æ®
 			}
-			//-----ÕæÕıµÄÍ¼Æ¬Êı¾İ-----
-			picLength = frameLength - nonPicDataLength;		//¼ÆËãÍ¼Æ¬Êı¾İ³¤¶È
-			pPicData = new byte[picLength];					//¶¯Ì¬·ÖÅäÍ¼Æ¬Êı¾İÄÚ´æ¿Õ¼ä
-			memset(pPicData, 0, picLength);					//Çå¿ÕÍ¼Æ¬Êı¾İÄÚ´æ
-			fread(pPicData, picLength, 1, fp);				//µÃµ½Í¼Æ¬Êı¾İ
+			//-----çœŸæ­£çš„å›¾ç‰‡æ•°æ®-----
+			picLength = frameLength - nonPicDataLength;		//è®¡ç®—å›¾ç‰‡æ•°æ®é•¿åº¦
+			pPicData = new byte[picLength];					//åŠ¨æ€åˆ†é…å›¾ç‰‡æ•°æ®å†…å­˜ç©ºé—´
+			memset(pPicData, 0, picLength);					//æ¸…ç©ºå›¾ç‰‡æ•°æ®å†…å­˜
+			fread(pPicData, picLength, 1, fp);				//å¾—åˆ°å›¾ç‰‡æ•°æ®
 			//------------------------
-			fclose(fp);										//²Ù×÷ÒÑÍê³É£¬¹Ø±ÕÎÄ¼ş¡£
+			fclose(fp);										//æ“ä½œå·²å®Œæˆï¼Œå…³é—­æ–‡ä»¶ã€‚
 		}
 		else
 		{
-			//ÆäÓà²»Ö§³ÖµÄ°æ±¾
-			fclose(fp);//¹Ø±Õ
+			//å…¶ä½™ä¸æ”¯æŒçš„ç‰ˆæœ¬
+			fclose(fp);//å…³é—­
 			fp = NULL;
 			return false;
 		}
 		return true;
 	}
 
-	//È¡µÃÍ¼Æ¬Êı¾İµÄ³¤¶È
+	//å–å¾—å›¾ç‰‡æ•°æ®çš„é•¿åº¦
 	int getPictureLength()
 	{
 		return picLength;
 	}
 
-	//È¡µÃÖ¸ÏòÍ¼Æ¬Êı¾İµÄÖ¸Õë
+	//å–å¾—æŒ‡å‘å›¾ç‰‡æ•°æ®çš„æŒ‡é’ˆ
 	byte *getPictureDataPtr()
 	{
 		return pPicData;
 	}
 
-	//È¡µÃÍ¼Æ¬Êı¾İµÄÀ©Õ¹Ãû£¨Ö¸Õë£©
+	//å–å¾—å›¾ç‰‡æ•°æ®çš„æ‰©å±•åï¼ˆæŒ‡é’ˆï¼‰
 	char *getPictureFormat()
 	{
 		return picFormat;
@@ -400,41 +399,41 @@ namespace spID3 {
 		FILE *fp = NULL;
 		if (picLength > 0)
 		{
-			fp = fopen(outFilePath, "wb");		//´ò¿ªÄ¿±êÎÄ¼ş
-			if (fp)								//´ò¿ª³É¹¦
+			fp = fopen(outFilePath, "wb");		//æ‰“å¼€ç›®æ ‡æ–‡ä»¶
+			if (fp)								//æ‰“å¼€æˆåŠŸ
 			{
-				fwrite(pPicData, picLength, 1, fp);	//Ğ´ÈëÎÄ¼ş
-				fclose(fp);							//¹Ø±Õ
+				fwrite(pPicData, picLength, 1, fp);	//å†™å…¥æ–‡ä»¶
+				fclose(fp);							//å…³é—­
 				return true;
 			}
 			else
 			{
-				return false;						//ÎÄ¼ş´ò¿ªÊ§°Ü
+				return false;						//æ–‡ä»¶æ‰“å¼€å¤±è´¥
 			}
 		}
 		else
 		{
-			return false;						//Ã»ÓĞÍ¼ÏñÊı¾İ
+			return false;						//æ²¡æœ‰å›¾åƒæ•°æ®
 		}
 	}
 
-	//ÌáÈ¡Í¼Æ¬ÎÄ¼ş£¬²ÎÊı1£ºÊäÈëÎÄ¼ş£¬²ÎÊı2£ºÊä³öÎÄ¼ş£¬·µ»ØÖµ£ºÊÇ·ñ³É¹¦
+	//æå–å›¾ç‰‡æ–‡ä»¶ï¼Œå‚æ•°1ï¼šè¾“å…¥æ–‡ä»¶ï¼Œå‚æ•°2ï¼šè¾“å‡ºæ–‡ä»¶ï¼Œè¿”å›å€¼ï¼šæ˜¯å¦æˆåŠŸ
 	bool extractPicture(const char *inFilePath, const char *outFilePath)
 	{
-		if (loadPictureData(inFilePath))	//Èç¹ûÈ¡µÃÍ¼Æ¬Êı¾İ³É¹¦
+		if (loadPictureData(inFilePath))	//å¦‚æœå–å¾—å›¾ç‰‡æ•°æ®æˆåŠŸ
 		{
 			if (writePictureDataToFile(outFilePath))
 			{
-				return true;				//ÎÄ¼şĞ´³ö³É¹¦
+				return true;				//æ–‡ä»¶å†™å‡ºæˆåŠŸ
 			}
 			else
 			{
-				return false;				//ÎÄ¼şĞ´³öÊ§°Ü
+				return false;				//æ–‡ä»¶å†™å‡ºå¤±è´¥
 			}
 		}
 		else
 		{
-			return false;					//ÎŞÍ¼Æ¬Êı¾İ
+			return false;					//æ— å›¾ç‰‡æ•°æ®
 		}
 		freePictureData();
 	}

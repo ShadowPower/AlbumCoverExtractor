@@ -1,10 +1,10 @@
 /*
-FLAC±êÇ©Í¼Æ¬ÌáÈ¡¿â Ver 1.0
-´ÓFLACÎÄ¼şÖĞÎÈ¶¨¡¢¿ì½İ¡¢¸ßĞ§¡¢±ã½İµØÌáÈ¡³öÍ¼Æ¬Êı¾İ
-Ö§³ÖBMP¡¢JPEG¡¢PNG¡¢GIFÍ¼Æ¬¸ñÊ½
-¿É½«Í¼Æ¬Êı¾İÌáÈ¡µ½ÎÄ¼ş»òÄÚ´æÖĞ£¬²¢ÄÜ°²È«µØÊÍ·ÅÄÚ´æ
-Ê¹ÓÃ·½Ê½ÓëID3v2°æ±¾ÏàÍ¬
-ShadowPower ÓÚ2014/8/1 Ò¹¼ä
+FLACæ ‡ç­¾å›¾ç‰‡æå–åº“ Ver 1.0
+ä»FLACæ–‡ä»¶ä¸­ç¨³å®šã€å¿«æ·ã€é«˜æ•ˆã€ä¾¿æ·åœ°æå–å‡ºå›¾ç‰‡æ•°æ®
+æ”¯æŒBMPã€JPEGã€PNGã€GIFå›¾ç‰‡æ ¼å¼
+å¯å°†å›¾ç‰‡æ•°æ®æå–åˆ°æ–‡ä»¶æˆ–å†…å­˜ä¸­ï¼Œå¹¶èƒ½å®‰å…¨åœ°é‡Šæ”¾å†…å­˜
+ä½¿ç”¨æ–¹å¼ä¸ID3v2ç‰ˆæœ¬ç›¸åŒ
+ShadowPower äº2014/8/1 å¤œé—´
 */
 
 #ifndef _ShadowPower_FLACPIC___
@@ -19,24 +19,23 @@ ShadowPower ÓÚ2014/8/1 Ò¹¼ä
 #include <cstring>
 
 typedef unsigned char byte;
-using namespace std;
 
 namespace spFLAC {
-	//FlacÔªÊı¾İ¿éÍ·²¿½á¹¹Ìå¶¨Òå
+	//Flacå…ƒæ•°æ®å—å¤´éƒ¨ç»“æ„ä½“å®šä¹‰
 	struct FlacMetadataBlockHeader
 	{
-		byte flag;		//±êÖ¾Î»£¬¸ß1Î»£ºÊÇ·ñÎª×îºóÒ»¸öÊı¾İ¿é£¬µÍ7Î»£ºÊı¾İ¿éÀàĞÍ
-		byte length[3];	//Êı¾İ¿é³¤¶È£¬²»º¬Êı¾İ¿éÍ·²¿
+		byte flag;		//æ ‡å¿—ä½ï¼Œé«˜1ä½ï¼šæ˜¯å¦ä¸ºæœ€åä¸€ä¸ªæ•°æ®å—ï¼Œä½7ä½ï¼šæ•°æ®å—ç±»å‹
+		byte length[3];	//æ•°æ®å—é•¿åº¦ï¼Œä¸å«æ•°æ®å—å¤´éƒ¨
 	};
 
-	byte *pPicData = 0;		//Ö¸ÏòÍ¼Æ¬Êı¾İµÄÖ¸Õë
-	int picLength = 0;		//´æ·ÅÍ¼Æ¬Êı¾İ³¤¶È
-	char picFormat[4] = {};	//´æ·ÅÍ¼Æ¬Êı¾İµÄ¸ñÊ½£¨À©Õ¹Ãû£©
+	byte *pPicData = 0;		//æŒ‡å‘å›¾ç‰‡æ•°æ®çš„æŒ‡é’ˆ
+	int picLength = 0;		//å­˜æ”¾å›¾ç‰‡æ•°æ®é•¿åº¦
+	char picFormat[4] = {};	//å­˜æ”¾å›¾ç‰‡æ•°æ®çš„æ ¼å¼ï¼ˆæ‰©å±•åï¼‰
 
-	//¼ì²âÍ¼Æ¬¸ñÊ½£¬²ÎÊı1£ºÊı¾İ£¬·µ»ØÖµ£ºÊÇ·ñ³É¹¦£¨²»ÊÇÍ¼Æ¬ÔòÊ§°Ü£©
+	//æ£€æµ‹å›¾ç‰‡æ ¼å¼ï¼Œå‚æ•°1ï¼šæ•°æ®ï¼Œè¿”å›å€¼ï¼šæ˜¯å¦æˆåŠŸï¼ˆä¸æ˜¯å›¾ç‰‡åˆ™å¤±è´¥ï¼‰
 	bool verificationPictureFormat(char *data)
 	{
-		//Ö§³Ö¸ñÊ½£ºJPEG/PNG/BMP/GIF
+		//æ”¯æŒæ ¼å¼ï¼šJPEG/PNG/BMP/GIF
 		byte jpeg[2] = { 0xff, 0xd8 };
 		byte png[8] = { 0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a };
 		byte gif[6] = { 0x47, 0x49, 0x46, 0x38, 0x39, 0x61 };
@@ -67,7 +66,7 @@ namespace spFLAC {
 		return true;
 	}
 
-	//°²È«ÊÍ·ÅÄÚ´æ
+	//å®‰å…¨é‡Šæ”¾å†…å­˜
 	void freePictureData()
 	{
 		if (pPicData)
@@ -79,64 +78,64 @@ namespace spFLAC {
 		memset(&picFormat, 0, 4);
 	}
 
-	//½«Í¼Æ¬ÌáÈ¡µ½ÄÚ´æ£¬²ÎÊı1£ºÎÄ¼şÂ·¾¶£¬³É¹¦·µ»Øtrue
+	//å°†å›¾ç‰‡æå–åˆ°å†…å­˜ï¼Œå‚æ•°1ï¼šæ–‡ä»¶è·¯å¾„ï¼ŒæˆåŠŸè¿”å›true
 	bool loadPictureData(const char *inFilePath)
 	{
 		freePictureData();
 		FILE *fp = NULL;
 		fp = fopen(inFilePath, "rb");
-		if (!fp)						//Èç¹û´ò¿ªÊ§°Ü
+		if (!fp)						//å¦‚æœæ‰“å¼€å¤±è´¥
 		{
 			fp = NULL;
 			return false;
 		}
-		fseek(fp, 0, SEEK_SET);			//ÉèÎÄ¼şÁ÷Ö¸Õëµ½ÎÄ¼şÍ·²¿
-		byte magic[4] = {};				//´æ·ÅĞ£ÑéÊı¾İ
+		fseek(fp, 0, SEEK_SET);			//è®¾æ–‡ä»¶æµæŒ‡é’ˆåˆ°æ–‡ä»¶å¤´éƒ¨
+		byte magic[4] = {};				//å­˜æ”¾æ ¡éªŒæ•°æ®
 		memset(&magic, 0, 4);
-		fread(&magic, 4, 1, fp);			//¶ÁÈëĞ£ÑéÊı¾İ
+		fread(&magic, 4, 1, fp);			//è¯»å…¥æ ¡éªŒæ•°æ®
 		byte fLaC[4] = { 0x66, 0x4c, 0x61, 0x43 };
 		if (memcmp(&magic, &fLaC, 4) == 0)
 		{
-			//Êı¾İĞ£ÑéÕıÈ·£¬ÎÄ¼şÀàĞÍÎªFlac
-			FlacMetadataBlockHeader fmbh;	//´´½¨FlacÔªÊı¾İ¿éÍ·²¿½á¹¹Ìå
-			memset(&fmbh, 0, 4);			//Çå¿ÕÄÚ´æ
-			fread(&fmbh, 4, 1, fp);			//¶ÁÈëÍ·²¿Êı¾İ
-			//¼ÆËãÊı¾İ¿é³¤¶È£¬²»º¬Í·²¿
+			//æ•°æ®æ ¡éªŒæ­£ç¡®ï¼Œæ–‡ä»¶ç±»å‹ä¸ºFlac
+			FlacMetadataBlockHeader fmbh;	//åˆ›å»ºFlacå…ƒæ•°æ®å—å¤´éƒ¨ç»“æ„ä½“
+			memset(&fmbh, 0, 4);			//æ¸…ç©ºå†…å­˜
+			fread(&fmbh, 4, 1, fp);			//è¯»å…¥å¤´éƒ¨æ•°æ®
+			//è®¡ç®—æ•°æ®å—é•¿åº¦ï¼Œä¸å«å¤´éƒ¨
 			int blockLength = fmbh.length[0] * 0x10000 + fmbh.length[1] * 0x100 + fmbh.length[2];
-			int loopCount = 0;	//Ñ­»·¼ÆÊı£¬·ÀËÀ
+			int loopCount = 0;	//å¾ªç¯è®¡æ•°ï¼Œé˜²æ­»
 			while ((fmbh.flag & 0x7f) != 6)
 			{
-				//Èç¹ûÊı¾İÀàĞÍ²»ÊÇÍ¼Æ¬£¬´Ë´¦Ñ­»·Ö´ĞĞ
+				//å¦‚æœæ•°æ®ç±»å‹ä¸æ˜¯å›¾ç‰‡ï¼Œæ­¤å¤„å¾ªç¯æ‰§è¡Œ
 				loopCount++;
 				if (loopCount > 40)
 				{
-					//Ñ­»·40´ÎÃ»ÓĞÓöµ½Ä©Î²¾ÍÖ±½ÓÍ£Ö¹
+					//å¾ªç¯40æ¬¡æ²¡æœ‰é‡åˆ°æœ«å°¾å°±ç›´æ¥åœæ­¢
 					fclose(fp);
 					fp = NULL;
-					return false;					//¿ÉÄÜÎÄ¼ş²»Õı³£
+					return false;					//å¯èƒ½æ–‡ä»¶ä¸æ­£å¸¸
 				}
-				fseek(fp, blockLength, SEEK_CUR);	//Ìø¹ıÊı¾İ¿é
+				fseek(fp, blockLength, SEEK_CUR);	//è·³è¿‡æ•°æ®å—
 				if ((fmbh.flag & 0x80) == 0x80)
 				{
-					//ÒÑ¾­ÊÇ×îºóÒ»¸öÊı¾İ¿éÁË£¬ÈÔÈ»²»ÊÇÍ¼Æ¬
+					//å·²ç»æ˜¯æœ€åä¸€ä¸ªæ•°æ®å—äº†ï¼Œä»ç„¶ä¸æ˜¯å›¾ç‰‡
 					fclose(fp);
 					fp = NULL;
-					return false;					//Ã»ÓĞÕÒµ½Í¼Æ¬Êı¾İ
+					return false;					//æ²¡æœ‰æ‰¾åˆ°å›¾ç‰‡æ•°æ®
 				}
-				//È¡µÃÏÂÒ»Êı¾İ¿éÍ·²¿
-				memset(&fmbh, 0, 4);				//Çå¿ÕÄÚ´æ
-				fread(&fmbh, 4, 1, fp);				//¶ÁÈëÍ·²¿Êı¾İ
-				blockLength = fmbh.length[0] * 0x10000 + fmbh.length[1] * 0x100 + fmbh.length[2];//¼ÆËãÊı¾İ¿é³¤¶È
+				//å–å¾—ä¸‹ä¸€æ•°æ®å—å¤´éƒ¨
+				memset(&fmbh, 0, 4);				//æ¸…ç©ºå†…å­˜
+				fread(&fmbh, 4, 1, fp);				//è¯»å…¥å¤´éƒ¨æ•°æ®
+				blockLength = fmbh.length[0] * 0x10000 + fmbh.length[1] * 0x100 + fmbh.length[2];//è®¡ç®—æ•°æ®å—é•¿åº¦
 			}
-			//´ËÊ±ÒÑµ½Í¼Æ¬Êı¾İ¿é
+			//æ­¤æ—¶å·²åˆ°å›¾ç‰‡æ•°æ®å—
 
-			int nonPicDataLength = 0;				//·ÇÍ¼Æ¬Êı¾İ³¤¶È
-			fseek(fp, 4, SEEK_CUR);					//ĞÅÑöÖ®Ô¾
+			int nonPicDataLength = 0;				//éå›¾ç‰‡æ•°æ®é•¿åº¦
+			fseek(fp, 4, SEEK_CUR);					//ä¿¡ä»°ä¹‹è·ƒ
 			nonPicDataLength += 4;
-			char nextJumpLength[4];					//ÏÂ´ÎÒªÌøµÄ³¤¶È
-			fread(&nextJumpLength, 4, 1, fp);		//¶ÁÈ¡°²È«ÌøÔ¾¾àÀë
+			char nextJumpLength[4];					//ä¸‹æ¬¡è¦è·³çš„é•¿åº¦
+			fread(&nextJumpLength, 4, 1, fp);		//è¯»å–å®‰å…¨è·³è·ƒè·ç¦»
 			nonPicDataLength += 4;
-			int jumpLength = nextJumpLength[0] * 0x1000000 + nextJumpLength[1] * 0x10000 + nextJumpLength[2] * 0x100 + nextJumpLength[3];//¼ÆËãÊı¾İ¿é³¤¶È
+			int jumpLength = nextJumpLength[0] * 0x1000000 + nextJumpLength[1] * 0x10000 + nextJumpLength[2] * 0x100 + nextJumpLength[3];//è®¡ç®—æ•°æ®å—é•¿åº¦
 			fseek(fp, jumpLength, SEEK_CUR);		//Let's Jump!!
 			nonPicDataLength += jumpLength;
 			fread(&nextJumpLength, 4, 1, fp);
@@ -144,19 +143,19 @@ namespace spFLAC {
 			jumpLength = nextJumpLength[0] * 0x1000000 + nextJumpLength[1] * 0x10000 + nextJumpLength[2] * 0x100 + nextJumpLength[3];
 			fseek(fp, jumpLength, SEEK_CUR);		//Let's Jump too!!
 			nonPicDataLength += jumpLength;
-			fseek(fp, 20, SEEK_CUR);				//ĞÅÑöÖ®Ô¾
+			fseek(fp, 20, SEEK_CUR);				//ä¿¡ä»°ä¹‹è·ƒ
 			nonPicDataLength += 20;
 
-			//·ÇÖ÷Á÷Çé¿ö¼ì²â+»ñµÃÎÄ¼ş¸ñÊ½
+			//éä¸»æµæƒ…å†µæ£€æµ‹+è·å¾—æ–‡ä»¶æ ¼å¼
 			char tempData[20] = {};
 			memset(tempData, 0, 20);
 			fread(&tempData, 8, 1, fp);
-			fseek(fp, -8, SEEK_CUR);	//»Øµ½Ô­Î»
-			//ÅĞ¶Ï40´Î£¬Ò»Î»Ò»Î»Ìøµ½ÎÄ¼şÍ·
-			bool ok = false;			//ÊÇ·ñÕıÈ·Ê¶±ğ³öÎÄ¼şÍ·
+			fseek(fp, -8, SEEK_CUR);	//å›åˆ°åŸä½
+			//åˆ¤æ–­40æ¬¡ï¼Œä¸€ä½ä¸€ä½è·³åˆ°æ–‡ä»¶å¤´
+			bool ok = false;			//æ˜¯å¦æ­£ç¡®è¯†åˆ«å‡ºæ–‡ä»¶å¤´
 			for (int i = 0; i < 40; i++)
 			{
-				//Ğ£ÑéÎÄ¼şÍ·
+				//æ ¡éªŒæ–‡ä»¶å¤´
 				if (verificationPictureFormat(tempData))
 				{
 					ok = true;
@@ -164,7 +163,7 @@ namespace spFLAC {
 				}
 				else
 				{
-					//Èç¹ûĞ£ÑéÊ§°Ü³¢ÊÔ¼ÌĞøÏòºóĞ£Ñé
+					//å¦‚æœæ ¡éªŒå¤±è´¥å°è¯•ç»§ç»­å‘åæ ¡éªŒ
 					fseek(fp, 1, SEEK_CUR);
 					nonPicDataLength++;
 					fread(&tempData, 8, 1, fp);
@@ -177,20 +176,20 @@ namespace spFLAC {
 				fclose(fp);
 				fp = NULL;
 				freePictureData();
-				return false;			//ÎŞ·¨Ê¶±ğµÄÊı¾İ
+				return false;			//æ— æ³•è¯†åˆ«çš„æ•°æ®
 			}
 
-			//-----µÖ´ïÍ¼Æ¬Êı¾İÇø-----
-			picLength = blockLength - nonPicDataLength;		//¼ÆËãÍ¼Æ¬Êı¾İ³¤¶È
-			pPicData = new byte[picLength];					//¶¯Ì¬·ÖÅäÍ¼Æ¬Êı¾İÄÚ´æ¿Õ¼ä
-			memset(pPicData, 0, picLength);					//Çå¿ÕÍ¼Æ¬Êı¾İÄÚ´æ
-			fread(pPicData, picLength, 1, fp);				//µÃµ½Í¼Æ¬Êı¾İ
+			//-----æŠµè¾¾å›¾ç‰‡æ•°æ®åŒº-----
+			picLength = blockLength - nonPicDataLength;		//è®¡ç®—å›¾ç‰‡æ•°æ®é•¿åº¦
+			pPicData = new byte[picLength];					//åŠ¨æ€åˆ†é…å›¾ç‰‡æ•°æ®å†…å­˜ç©ºé—´
+			memset(pPicData, 0, picLength);					//æ¸…ç©ºå›¾ç‰‡æ•°æ®å†…å­˜
+			fread(pPicData, picLength, 1, fp);				//å¾—åˆ°å›¾ç‰‡æ•°æ®
 			//------------------------
-			fclose(fp);										//²Ù×÷ÒÑÍê³É£¬¹Ø±ÕÎÄ¼ş¡£
+			fclose(fp);										//æ“ä½œå·²å®Œæˆï¼Œå…³é—­æ–‡ä»¶ã€‚
 		}
 		else
 		{
-			//Ğ£ÑéÊ§°Ü£¬²»ÊÇFlac
+			//æ ¡éªŒå¤±è´¥ï¼Œä¸æ˜¯Flac
 			fclose(fp);
 			fp = NULL;
 			freePictureData();
@@ -199,19 +198,19 @@ namespace spFLAC {
 		return true;
 	}
 
-	//È¡µÃÍ¼Æ¬Êı¾İµÄ³¤¶È
+	//å–å¾—å›¾ç‰‡æ•°æ®çš„é•¿åº¦
 	int getPictureLength()
 	{
 		return picLength;
 	}
 
-	//È¡µÃÖ¸ÏòÍ¼Æ¬Êı¾İµÄÖ¸Õë
+	//å–å¾—æŒ‡å‘å›¾ç‰‡æ•°æ®çš„æŒ‡é’ˆ
 	byte *getPictureDataPtr()
 	{
 		return pPicData;
 	}
 
-	//È¡µÃÍ¼Æ¬Êı¾İµÄÀ©Õ¹Ãû£¨Ö¸Õë£©
+	//å–å¾—å›¾ç‰‡æ•°æ®çš„æ‰©å±•åï¼ˆæŒ‡é’ˆï¼‰
 	char *getPictureFormat()
 	{
 		return picFormat;
@@ -222,41 +221,41 @@ namespace spFLAC {
 		FILE *fp = NULL;
 		if (picLength > 0)
 		{
-			fp = fopen(outFilePath, "wb");		//´ò¿ªÄ¿±êÎÄ¼ş
-			if (fp)								//´ò¿ª³É¹¦
+			fp = fopen(outFilePath, "wb");		//æ‰“å¼€ç›®æ ‡æ–‡ä»¶
+			if (fp)								//æ‰“å¼€æˆåŠŸ
 			{
-				fwrite(pPicData, picLength, 1, fp);	//Ğ´ÈëÎÄ¼ş
-				fclose(fp);							//¹Ø±Õ
+				fwrite(pPicData, picLength, 1, fp);	//å†™å…¥æ–‡ä»¶
+				fclose(fp);							//å…³é—­
 				return true;
 			}
 			else
 			{
-				return false;						//ÎÄ¼ş´ò¿ªÊ§°Ü
+				return false;						//æ–‡ä»¶æ‰“å¼€å¤±è´¥
 			}
 		}
 		else
 		{
-			return false;						//Ã»ÓĞÍ¼ÏñÊı¾İ
+			return false;						//æ²¡æœ‰å›¾åƒæ•°æ®
 		}
 	}
 
-	//ÌáÈ¡Í¼Æ¬ÎÄ¼ş£¬²ÎÊı1£ºÊäÈëÎÄ¼ş£¬²ÎÊı2£ºÊä³öÎÄ¼ş£¬·µ»ØÖµ£ºÊÇ·ñ³É¹¦
+	//æå–å›¾ç‰‡æ–‡ä»¶ï¼Œå‚æ•°1ï¼šè¾“å…¥æ–‡ä»¶ï¼Œå‚æ•°2ï¼šè¾“å‡ºæ–‡ä»¶ï¼Œè¿”å›å€¼ï¼šæ˜¯å¦æˆåŠŸ
 	bool extractPicture(const char *inFilePath, const char *outFilePath)
 	{
-		if (loadPictureData(inFilePath))	//Èç¹ûÈ¡µÃÍ¼Æ¬Êı¾İ³É¹¦
+		if (loadPictureData(inFilePath))	//å¦‚æœå–å¾—å›¾ç‰‡æ•°æ®æˆåŠŸ
 		{
 			if (writePictureDataToFile(outFilePath))
 			{
-				return true;				//ÎÄ¼şĞ´³ö³É¹¦
+				return true;				//æ–‡ä»¶å†™å‡ºæˆåŠŸ
 			}
 			else
 			{
-				return false;				//ÎÄ¼şĞ´³öÊ§°Ü
+				return false;				//æ–‡ä»¶å†™å‡ºå¤±è´¥
 			}
 		}
 		else
 		{
-			return false;					//ÎŞÍ¼Æ¬Êı¾İ
+			return false;					//æ— å›¾ç‰‡æ•°æ®
 		}
 		freePictureData();
 	}
